@@ -1,6 +1,6 @@
 # Smart Canteen
 
-A full-stack smart canteen application built with:
+A full-stack smart canteen application.
 
 ## Tech Stack
 - Flutter (Frontend)
@@ -21,10 +21,45 @@ A full-stack smart canteen application built with:
 ## Project Structure
 - smart_canteen/ → Flutter app
 - smart_canteen_server/ → Backend API
+### About the Database
+This project uses SQLite database. You can access the database by installing SQLite on your system and then open the canteenDB.db file in the server directory using SQLite
 
 ## Setup
+### Add Secrets
+The project features google authentication, so you will have to create google auth credential on your google console to use them.
+- Go to
+```bash
+smart-canteen/smart_canteen/lib/google_auth_service.dart
+```
+and enter the webclient id in it.
+- Also create a .env file by referencing the .env.example file in the backend.
 ### Backend
 ```bash
 cd smart_canteen_server
 npm install
 node server.js
+```
+### Flutter App
+```bash
+flutter pub get
+flutter run
+```
+### Access Admin panel
+```bash
+localhost:3000/admin
+```
+- Default Username: master
+- Dafault Password: master123
+
+# 🤝 Contributing
+
+Contributions, suggestions, and feedback are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a Pull Request
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub!
