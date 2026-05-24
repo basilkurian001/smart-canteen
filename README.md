@@ -1,5 +1,5 @@
+![main screenshot](screenshots/main.png)
 # Smart Canteen
-
 A full-stack smart canteen application.
 
 ## Tech Stack
