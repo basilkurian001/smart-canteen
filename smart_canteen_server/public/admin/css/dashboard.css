@@ -1,0 +1,508 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f6f9;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  width: 240px;
+  background: #1f2937;
+  color: #fff;
+  padding: 20px;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.sidebar img {
+  width: 40px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 12px;
+  color: #cbd5e1;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: #374151;
+  color: #fff;
+}
+
+/* =========================
+   CONTENT
+========================= */
+.content {
+  flex: 1;
+  padding: 25px;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   STATS
+========================= */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.card strong {
+  font-size: 22px;
+}
+
+/* =========================
+   PANEL
+========================= */
+.panel {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* =========================
+   BASE TABLE STYLES (SHARED)
+========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th,
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+  color: #444;
+}
+
+/* =========================================================
+   DASHBOARD TABLE (5 COLUMNS)
+   class="orders-table dashboard-table"
+========================================================= */
+.dashboard-table th:nth-child(1),
+.dashboard-table td:nth-child(1) {
+  width: 18%;
+}
+
+.dashboard-table th:nth-child(2),
+.dashboard-table td:nth-child(2) {
+  width: 22%;
+}
+
+.dashboard-table th:nth-child(3),
+.dashboard-table td:nth-child(3) {
+  width: 15%;
+}
+
+.dashboard-table th:nth-child(4),
+.dashboard-table td:nth-child(4) {
+  width: 20%;
+  text-align: center;
+}
+
+.dashboard-table th:nth-child(5),
+.dashboard-table td:nth-child(5) {
+  width: 25%;
+  text-align: center;
+}
+
+/* =========================================================
+   ORDERS PAGE TABLE (6 COLUMNS)
+   class="orders-table"
+========================================================= */
+.orders-table th:nth-child(1),
+.orders-table td:nth-child(1) {
+  width: 14%;
+}
+
+.orders-table th:nth-child(2),
+.orders-table td:nth-child(2) {
+  width: 18%;
+}
+
+.orders-table th:nth-child(3),
+.orders-table td:nth-child(3) {
+  width: 13%;
+}
+
+.orders-table th:nth-child(4),
+.orders-table td:nth-child(4) {
+  width: 12%;
+  text-align: right;
+}
+
+.orders-table th:nth-child(5),
+.orders-table td:nth-child(5) {
+  width: 14%;
+  text-align: center;
+}
+
+.orders-table th:nth-child(6),
+.orders-table td:nth-child(6) {
+  width: 30%;
+  text-align: center;
+}
+
+/* =========================================================
+   FOODS PAGE TABLE (8 COLUMNS)
+   class="foods-table"
+========================================================= */
+.foods-table th:nth-child(1), .foods-table td:nth-child(1) { width: 15%; white-space: normal; } /* Name */
+.foods-table th:nth-child(2), .foods-table td:nth-child(2) { width: 10%; } /* Price */
+.foods-table th:nth-child(3), .foods-table td:nth-child(3) { width: 12%; } /* Category */
+.foods-table th:nth-child(4), .foods-table td:nth-child(4) { 
+  width: 20%; 
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+} /* Description */
+.foods-table th:nth-child(5), .foods-table td:nth-child(5) { width: 11%; } /* Vegetarian */
+.foods-table th:nth-child(6), .foods-table td:nth-child(6) { width: 10%; text-align: center; } /* Image */
+.foods-table th:nth-child(7), .foods-table td:nth-child(7) { width: 10%; text-align: center; } /* Status */
+.foods-table th:nth-child(8), .foods-table td:nth-child(8) { width: 12%; text-align: center; } /* Action */
+
+/* =========================
+   STATUS BADGES
+========================= */
+.status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.PLACED {
+  background: #fde68a;
+  color: #000;
+}
+
+.PREPARING {
+  background: #fdba74;
+  color: #000;
+}
+
+.READY {
+  background: #93c5fd;
+  color: #000;
+}
+
+.DELIVERED {
+  background: #86efac;
+  color: #000;
+}
+
+/* =========================
+   ACTION DROPDOWN
+========================= */
+select {
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+/* =========================
+   PANEL HEADER
+========================= */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.panel-header input {
+  padding: 8px 12px;
+  width: 240px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* =========================
+   ACTION BUTTON
+========================= */
+.apply-btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.apply-btn:hover {
+  background: #1d4ed8;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  width: 320px;
+  border-radius: 10px;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+}
+
+.modal-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.danger-btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.danger-btn:hover {
+  background: #b91c1c;
+}
+
+.user-row {
+  cursor: pointer;
+}
+
+.user-row:hover {
+  background: #f9fafb;
+}
+
+.user-details td {
+  background: #f8fafc;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* =========================
+   USERS TABLE
+========================= */
+.users-table .user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+  width: 80px;
+  text-align: center;
+}
+
+.users-table th:nth-child(5),
+.users-table td:nth-child(5) {
+  text-align: right;
+  font-weight: 600;
+}
+
+.points-panel {
+  max-width: 420px;
+}
+
+.points-panel label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.points-panel input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* =========================
+   ANNOUNCEMENT PAGE INPUTS
+========================= */
+.announcement-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.announcement-form input[type="text"],
+
+.announcement-form label {
+  font-weight: 600;
+}
+
+/* =========================
+   MULTILINE ANNOUNCEMENT
+========================= */
+#annText {
+  width: 100%;
+  max-width: 600px;
+  min-height: 100px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  /* user can resize vertically */
+}
+
+/* =========================
+   ORDER EXPANSION
+========================= */
+.toggle-arrow {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: transform 0.2s ease;
+  font-size: 12px;
+  color: #666;
+}
+
+.toggle-arrow.expanded {
+  transform: rotate(90deg);
+}
+
+.order-details-row {
+  background: #fafafa;
+}
+
+.order-details-content {
+  padding: 15px;
+  border-top: 1px dashed #ddd;
+}
+
+.order-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.order-details-table th, 
+.order-details-table td {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.order-details-table th {
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.loading-indicator {
+  font-size: 13px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loading-indicator::after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ccc;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

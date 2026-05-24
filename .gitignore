@@ -1,0 +1,32 @@
+# ---------- Backend ----------
+smart_canteen_server/node_modules/
+smart_canteen_server/*.db
+smart_canteen_server/.env
+
+# ---------- Uploads ----------
+smart_canteen_server/uploads/**
+!smart_canteen_server/uploads/
+!smart_canteen_server/uploads/avatars/
+!smart_canteen_server/uploads/.gitkeep
+!smart_canteen_server/uploads/avatars/.gitkeep
+
+# ---------- Public ----------
+# Ignore ONLY food images, not admin pages
+smart_canteen_server/public/food_images/**
+
+# Keep folders
+!smart_canteen_server/public/
+!smart_canteen_server/public/food_images/
+!smart_canteen_server/public/.gitkeep
+!smart_canteen_server/public/food_images/.gitkeep
+
+# ---------- Flutter ----------
+smart_canteen/build/
+smart_canteen/.dart_tool/
+smart_canteen/android/.gradle/
+smart_canteen/android/app/build/
+
+# ---------- OS / IDE ----------
+.DS_Store
+.idea/
+.vscode/

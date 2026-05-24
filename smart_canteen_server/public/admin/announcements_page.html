@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>Announcement</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+<script>
+  const token = localStorage.getItem("adminToken");
+  if (!token) location.href = "index.html";
+</script>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="assets/images/smart_canteen_logo.png" />
+      <span>Smart Canteen</span>
+    </div>
+
+    <nav>
+      <a onclick="location.href='dashboard.html'">📊 Dashboard</a>
+      <a onclick="location.href='orders.html'">🧾 Orders</a>
+      <a onclick="location.href='food_page.html'">🍔 Food Items</a>
+      <a onclick="location.href='points_page.html'">🎯 Points Settings</a>
+      <a onclick="location.href='users_page.html'">👤 Users</a>
+      <a class="active">📢 Announcement</a>
+      <a onclick="adminLogout()">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <header class="topbar">
+      <h1>Announcement</h1>
+    </header>
+
+    <section class="announcement-form">
+
+      <label>Title</label>
+      <input type="text" id="annTitle" placeholder="Announcement title" />
+
+      <label>Announcement Message</label>
+        <textarea
+        id="annSubtitle"
+        rows="4"
+        placeholder="Enter announcement message..."
+        ></textarea>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="annActive" checked />
+        Active
+      </label>
+
+      <div style="margin-top: 20px;">
+        <button class="apply-btn" onclick="saveAnnouncement()">
+          Save Announcement
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<script src="js/announcements_page.js"></script>
+<script>
+function adminLogout() {
+  const ok = confirm("Are you sure you want to logout?");
+
+  if (!ok) return;
+
+  localStorage.removeItem("adminToken");
+  window.location.replace("index.html");
+}
+</script>
+
+</body>
+</html>

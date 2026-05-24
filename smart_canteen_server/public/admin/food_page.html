@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <title>Food Items</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+<script>
+  const token = localStorage.getItem("adminToken");
+  if (!token) window.location.replace("index.html");
+</script>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="assets/images/smart_canteen_logo.png" />
+      <span>Smart Canteen</span>
+    </div>
+
+    <nav>
+      <a onclick="location.href='dashboard.html'">📊 Dashboard</a>
+      <a onclick="location.href='orders.html'">🧾 Orders</a>
+      <a class="active">🍔 Food Items</a>
+      <a onclick="location.href='points_page.html'">🎯 Points Settings</a>
+      <a onclick="location.href='users_page.html'">👤 Users</a>
+      <a onclick="location.href='announcements_page.html'">📢 Announcements</a>
+      <a onclick="adminLogout()">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <header class="topbar">
+      <h1>Food Items</h1>
+      <button class="apply-btn" onclick="openModal()">+ Add Food</button>
+    </header>
+
+    <!-- FOOD TABLE -->
+    <section class="panel">
+      <table class="foods-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price (₹)</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Vegetarian</th>
+            <th>Image</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="foodTable"></tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div id="foodModal" class="modal hidden">
+  <div class="modal-content">
+    <h2 id="modalTitle">Add Food</h2>
+
+    <input type="hidden" id="foodId" />
+
+    <label>Name</label>
+    <input id="foodName" type="text" />
+
+    <label>Price</label>
+    <input id="foodPrice" type="number" />
+
+    <label>Category</label>
+    <select id="foodCategory">
+      <option value="breakfast">Breakfast</option>
+      <option value="lunch">Lunch</option>
+      <option value="snacks">Snacks</option>
+      <option value="drinks">Drinks</option>
+    </select>
+
+    <label>Description</label>
+    <textarea id="foodDescription" rows="3"></textarea>
+
+    <label>Image</label>
+    <input id="foodImage" type="file" />
+
+    <label>
+      <input type="checkbox" id="foodVegetarian" checked />
+      Vegetarian
+    </label>
+
+    <label>
+      <input type="checkbox" id="foodAvailable" checked />
+      Available
+    </label>
+
+    <div class="modal-actions">
+      <button class="apply-btn" onclick="saveFood()">Save</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/food_page.js"></script>
+<script>
+function adminLogout() {
+  const ok = confirm("Are you sure you want to logout?");
+
+  if (!ok) return;
+
+  localStorage.removeItem("adminToken");
+  window.location.replace("index.html");
+}
+</script>
+</body>
+</html>

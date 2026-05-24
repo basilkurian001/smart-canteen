@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #3f5efb, #6a82fb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-wrapper {
+      width: 900px;
+      max-width: 95%;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      display: flex;
+      overflow: hidden;
+    }
+
+    .login-left {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-left h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .login-left p {
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .input-group input:focus {
+      border-color: #4f6ef7;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 38px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .error-text {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #e53935;
+      display: none;
+    }
+
+    .login-btn {
+      background: #4f6ef7;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-btn:disabled {
+      background: #9faefb;
+      cursor: not-allowed;
+    }
+
+    .login-right {
+      flex: 1;
+      background: #f5f7fb;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-right img {
+      max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .login-wrapper {
+        flex-direction: column;
+      }
+      .login-right {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-wrapper">
+
+  <div class="login-left">
+    <h2>Admin Login</h2>
+    <p>Enter your credentials to access the admin panel</p>
+
+    <div class="input-group">
+      <label>Username</label>
+      <input type="text" id="username" oninput="clearError()" />
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="password" oninput="clearError()" />
+
+      <span class="toggle-password" onclick="togglePassword()">
+        <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 5C7 5 2.73 8.11 1 12C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 12C21.27 8.11 17 5 12 5Z"
+            stroke="#777" stroke-width="2"/>
+          <circle cx="12" cy="12" r="3" stroke="#777" stroke-width="2"/>
+        </svg>
+      </span>
+
+      <div id="errorText" class="error-text">
+        Invalid username or password
+      </div>
+    </div>
+
+    <button class="login-btn" id="loginBtn" onclick="adminLogin()">
+      Login
+    </button>
+  </div>
+
+  <div class="login-right">
+    <img src="assets/images/smart_canteen_logo.png" alt="Admin Illustration">
+  </div>
+
+</div>
+
+<script>
+(async function () {
+  const token = localStorage.getItem("adminToken");
+  if (!token) return;
+
+  try {
+    const res = await fetch("/admin/auth/me", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Invalid token");
+    }
+
+    // Token is valid
+    window.location.href = "dashboard.html";
+
+  } catch (err) {
+    // Token expired or invalid
+    localStorage.removeItem("adminToken");
+  }
+})();
+</script>
+
+
+
+<script>
+  function togglePassword() {
+    const password = document.getElementById("password");
+    password.type = password.type === "password" ? "text" : "password";
+  }
+
+  function showError(msg) {
+    const error = document.getElementById("errorText");
+    error.textContent = msg;
+    error.style.display = "block";
+  }
+
+  function clearError() {
+    document.getElementById("errorText").style.display = "none";
+  }
+
+  async function adminLogin() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const btn = document.getElementById("loginBtn");
+
+    if (!username || !password) {
+      showError("Please enter username and password");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Logging in...";
+
+    try {
+      const res = await fetch("/admin/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        showError(data.message || "Login failed");
+        btn.disabled = false;
+        btn.textContent = "Login";
+        return;
+      }
+
+      localStorage.setItem("adminToken", data.token);
+      window.location.href = "dashboard.html";
+
+    } catch (err) {
+      showError("Server error. Try again.");
+      btn.disabled = false;
+      btn.textContent = "Login";
+    }
+  }
+</script>
+
+</body>
+</html>

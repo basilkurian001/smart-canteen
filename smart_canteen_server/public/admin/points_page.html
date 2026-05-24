@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <title>Point Settings</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+<script>
+  const token = localStorage.getItem("adminToken");
+  if (!token) window.location.replace("index.html");
+</script>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="assets/images/smart_canteen_logo.png" />
+      <span>Smart Canteen</span>
+    </div>
+
+    <nav>
+      <a onclick="location.href='dashboard.html'">📊 Dashboard</a>
+      <a onclick="location.href='orders.html'">🧾 Orders</a>
+      <a onclick="location.href='food_page.html'">🍔 Food Items</a>
+      <a class="active">🎯 Points Settings</a>
+      <a onclick="location.href='users_page.html'">👤 Users</a>
+      <a onclick="location.href='announcements_page.html'">📢 Announcements</a>
+      <a onclick="adminLogout()">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <header class="topbar">
+      <h1>Point Settings</h1>
+    </header>
+
+    <section class="panel points-panel">
+      <h2>Points Configuration</h2>
+
+      <label>Points earned per ₹1</label>
+      <input type="number" step="0.01" id="pointsPerRupee" />
+
+      <label>Maximum discount (%)</label>
+      <input type="number" id="maxDiscountPercent" />
+
+      <button class="apply-btn" onclick="saveSettings()">
+        Save Settings
+      </button>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/points_page.js"></script>
+<script>
+function adminLogout() {
+  const ok = confirm("Are you sure you want to logout?");
+
+  if (!ok) return;
+
+  localStorage.removeItem("adminToken");
+  window.location.replace("index.html");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+   <!-- Prevent browser caching -->
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+<script>
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      const token = localStorage.getItem("adminToken");
+      if (!token) {
+        window.location.replace("index.html");
+      }
+    }
+  });
+</script>
+
+
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="assets/images/smart_canteen_logo.png" alt="Logo" />
+      <span>Smart Canteen</span>
+    </div>
+
+    <nav>
+      <a class="active">📊 Dashboard</a>
+      <a onclick="location.href='orders.html'">🧾 Orders</a>
+      <a onclick="location.href='food_page.html'">🍔 Food Items</a>
+      <a onclick="location.href='points_page.html'">🎯 Points Settings</a>
+      <a onclick="location.href='users_page.html'">👤 Users</a>
+      <a onclick="location.href='announcements_page.html'">📢 Announcements</a>
+      <a id="logout" onclick="adminLogout()">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <h1>Dashboard</h1>
+      <span class="admin-name">Admin</span>
+    </header>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="card">📦 Orders Today<br><strong id="ordersToday">0</strong></div>
+      <div class="card">⏳ Pending<br><strong id="pendingOrders">0</strong></div>
+      <div class="card">✅ Delivered<br><strong id="deliveredOrders">0</strong></div>
+      <div class="card">💰 Revenue<br><strong>₹<span id="revenue">0</span></strong></div>
+    </section>
+
+    <!-- ORDERS TABLE -->
+<section class="panel">
+  <div class="panel-header">
+    <h2>Recent Orders</h2>
+
+    <!-- Search Bar -->
+    <input
+      type="text"
+      id="orderSearch"
+      placeholder="Search orders..."
+      onkeyup="filterOrders()"
+    />
+  </div>
+
+  <table class="orders-table dashboard-table">
+    <thead>
+      <tr>
+        <th class="col-id">Order ID</th>
+        <th class="col-user">User</th>
+        <th class="col-total">Total</th>
+        <th class="col-status">Status</th>
+        <th class="col-action">Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="ordersTable">
+      <!-- Filled by JS -->
+    </tbody>
+  </table>
+</section>
+
+  </main>
+</div>
+
+<script src="js/dashboard.js"></script>
+<script>
+function adminLogout() {
+  const ok = confirm("Are you sure you want to logout?");
+
+  if (!ok) return;
+
+  localStorage.removeItem("adminToken");
+  window.location.replace("index.html");
+}
+</script>
+</body>
+</html>
