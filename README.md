@@ -26,16 +26,11 @@ This project uses SQLite database. You can access the database by installing SQL
 
 ## Setup
 ### Add Secrets
-The project features google authentication, so you will have to create google auth credential on your google console to use them.
-- Go to
-```bash
-smart-canteen/smart_canteen/lib/google_auth_service.dart
-```
-and enter the webclient id in it.
-- Also create a .env file by referencing the .env.example file in the backend.
+- The project features google authentication, so you will have to create google auth credential on your google console to use them.
+- Create a .env file for both frontend and backend by refencing their respective .env.example files in their directory.
+- For Newbies: Make sure that you enter the correct local ip address of the system running the server in the frontend .env file. 
 ### Backend
 ```bash
-cd smart_canteen_server
 npm install
 node server.js
 ```
