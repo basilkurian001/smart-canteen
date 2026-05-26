@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_canteen/auth_service.dart';
 import 'order_details_screen.dart';
+
+final API_URL = dotenv.get('API_URL');
 
 class OrderHistoryScreen extends StatefulWidget {
   const OrderHistoryScreen({super.key});
@@ -25,7 +28,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     final token = await AuthService().getToken();
 
     final res = await http.get(
-      Uri.parse("http://10.125.22.31:3000/orders"),
+      Uri.parse("$API_URL/orders"),
       headers: {"Authorization": "Bearer $token"},
     );
 

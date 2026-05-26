@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:io';
 
 class AuthService {
-  // Change this to your machine IP + port, e.g. http://192.168.1.10:3000
-  static const String baseUrl = "http://10.125.22.31:3000"; // emulator -> node on host
+  static String baseUrl = dotenv.get('API_URL'); // emulator -> node on host
 
   // single key for SharedPreferences
   static const String _tokenKey = "jwt_token";

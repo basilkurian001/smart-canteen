@@ -76,7 +76,7 @@ class SignInScreen extends StatelessWidget {
                 press: () async{
                                 try {
                     final data = await GoogleAuthService().signInWithGoogle(
-                       backendUrl: 'http://10.125.22.31:3000/auth/google'
+                       backendUrl: '$API_URL/auth/google'
                     );
 
                     final token = data["token"];

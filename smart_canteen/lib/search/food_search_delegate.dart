@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_canteen/food_details_screen.dart';
+import 'package:smart_canteen/order_history_screen.dart';
 import '../models/food.dart';
 
 class FoodSearchDelegate extends SearchDelegate {
@@ -12,7 +13,7 @@ class FoodSearchDelegate extends SearchDelegate {
     if (_loaded) return;
 
     final res = await http.get(
-      Uri.parse("http://10.125.22.31:3000/food"),
+      Uri.parse("$API_URL/food"),
     );
 
     final data = jsonDecode(res.body);
@@ -83,7 +84,7 @@ class FoodSearchDelegate extends SearchDelegate {
             return ListTile(
               leading: food.image != null
                   ? Image.network(
-                      "http://10.125.22.31:3000/food_images/${food.image}",
+                      "$API_URL/food_images/${food.image}",
                       width: 50,
                       fit: BoxFit.cover,
                     )

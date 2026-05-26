@@ -3,7 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:smart_canteen/auth_service.dart';
 import 'package:smart_canteen/homescreen.dart';
 import 'package:smart_canteen/signin.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:smart_canteen/token_check.dart';
+
+final API_URL = dotenv.get('API_URL');
 
 /* =========================
    SERVER CHECK FUNCTION
@@ -11,7 +14,7 @@ import 'package:smart_canteen/token_check.dart';
 Future<bool> checkServerStatus() async {
   try {
     final response = await http
-        .get(Uri.parse("http://10.125.22.31:3000/health"))
+        .get(Uri.parse("$API_URL/health"))
         .timeout(const Duration(seconds: 10));
 
     return response.statusCode == 200;
@@ -25,6 +28,7 @@ Future<bool> checkServerStatus() async {
 ========================= */
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   runApp(const MyApp());
 }
 

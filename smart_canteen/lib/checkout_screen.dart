@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:smart_canteen/auth_service.dart';
 import 'package:smart_canteen/cart_notifier.dart';
 import 'package:smart_canteen/cart_service.dart';
+import 'package:smart_canteen/main.dart';
 import 'models/food.dart';
 
 enum CheckoutMode { cart, buyNow }
@@ -48,7 +49,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     final token = await AuthService().getToken();
 
     final res = await http.get(
-      Uri.parse("http://10.125.22.31:3000/orders/preview"),
+      Uri.parse("$API_URL/orders/preview"),
       headers: {"Authorization": "Bearer $token"},
     );
 
@@ -118,8 +119,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     final token = await AuthService().getToken();
 
     final uri = widget.mode == CheckoutMode.cart
-        ? "http://10.125.22.31:3000/orders"
-        : "http://10.125.22.31:3000/orders/buy-now";
+        ? "$API_URL/orders"
+        : "$API_URL/orders/buy-now";
 
     final body = widget.mode == CheckoutMode.cart
         ? { "usePoints": _pointsToUse }
@@ -182,7 +183,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         horizontal: 12, vertical: 6),
                     child: ListTile(
                       leading: Image.network(
-                        "http://10.125.22.31:3000/food_images/${item['image']}",
+                        "$API_URL/food_images/${item['image']}",
                         width: 50,
                         fit: BoxFit.cover,
                       ),

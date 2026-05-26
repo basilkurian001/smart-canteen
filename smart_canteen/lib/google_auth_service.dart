@@ -1,11 +1,12 @@
 // lib/google_auth_service.dart
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 class GoogleAuthService {
   // 🔴 IMPORTANT: USE WEB CLIENT ID (NOT Android)
-  static const String _webClientId = 'enter your google client id'; //important for google authentication
+  static final String _webClientId = dotenv.get('GOOGLE_CLIENT_ID'); //important for google authentication
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email', 'profile'],

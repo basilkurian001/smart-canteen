@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_canteen/cart_notifier.dart';
@@ -10,6 +11,7 @@ import 'package:smart_canteen/cart_service.dart';
 import 'package:smart_canteen/category_foods_screen.dart';
 import 'package:smart_canteen/favourites_screen.dart';
 import 'package:smart_canteen/food_details_screen.dart';
+import 'package:smart_canteen/main.dart';
 import 'package:smart_canteen/models/food.dart';
 import 'package:smart_canteen/profile_screen.dart';
 import '../search/food_search_delegate.dart';
@@ -455,7 +457,7 @@ class _OfferBannerState extends State<OfferBanner> {
   Future<void> _fetchOffer() async {
     try {
       final res = await http.get(
-        Uri.parse("http://10.125.22.31:3000/offers"),
+        Uri.parse("$API_URL/offers"),
       );
 
       final data = jsonDecode(res.body);
@@ -576,7 +578,7 @@ class _SpecialForYouFoodsState extends State<SpecialForYouFoods> {
   Future<void> _fetchSpecialFoods() async {
     try {
       final res = await http.get(
-        Uri.parse("http://10.125.22.31:3000/food"),
+        Uri.parse("$API_URL/food"),
       );
 
       final data = jsonDecode(res.body);
@@ -653,7 +655,7 @@ class _SpecialFoodCard extends StatelessWidget {
               Positioned.fill(
                 child: food.image != null
                     ? Image.network(
-                        "http://10.125.22.31:3000/food_images/${food.image}",
+                        "$API_URL/food_images/${food.image}",
                         fit: BoxFit.cover,
                       )
                     : Container(color: Colors.grey.shade300),
@@ -738,7 +740,7 @@ class _PopularProductsState extends State<PopularProducts> {
 
   Future<void> _fetchFoods() async {
     final res = await http.get(
-      Uri.parse("http://10.125.22.31:3000/food"),
+      Uri.parse("$API_URL/food"),
     );
 
     final data = jsonDecode(res.body);
@@ -821,7 +823,7 @@ class ProductCard extends StatelessWidget {
             ),
             child: food.image != null
                 ? Image.network(
-                    "http://10.125.22.31:3000/food_images/${food.image}",
+                    "$API_URL/food_images/${food.image}",
                   )
                 : const Icon(Icons.fastfood),
           ),

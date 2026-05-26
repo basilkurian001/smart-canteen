@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_canteen/main.dart';
 import 'auth_service.dart';
 
 class FavouritesService {
-  static const _baseUrl = "http://10.125.22.31:3000";
 
   static Future<bool> isFavourite(int foodId) async {
     final token = await AuthService().getToken();
 
     final res = await http.get(
-      Uri.parse("$_baseUrl/favourites/check/$foodId"),
+      Uri.parse("$API_URL/favourites/check/$foodId"),
       headers: {"Authorization": "Bearer $token"},
     );
 
@@ -21,7 +21,7 @@ class FavouritesService {
     final token = await AuthService().getToken();
 
     await http.post(
-      Uri.parse("$_baseUrl/favourites/$foodId"),
+      Uri.parse("$API_URL/favourites/$foodId"),
       headers: {"Authorization": "Bearer $token"},
     );
   }
@@ -30,7 +30,7 @@ class FavouritesService {
     final token = await AuthService().getToken();
 
     await http.delete(
-      Uri.parse("$_baseUrl/favourites/$foodId"),
+      Uri.parse("$API_URL/favourites/$foodId"),
       headers: {"Authorization": "Bearer $token"},
     );
   }
@@ -39,7 +39,7 @@ class FavouritesService {
     final token = await AuthService().getToken();
 
     final res = await http.get(
-      Uri.parse("$_baseUrl/favourites"),
+      Uri.parse("$API_URL/favourites"),
       headers: {"Authorization": "Bearer $token"},
     );
 

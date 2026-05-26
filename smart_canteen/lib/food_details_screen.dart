@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_canteen/cart_notifier.dart';
 import 'package:smart_canteen/cart_service.dart';
@@ -7,6 +8,8 @@ import 'package:smart_canteen/checkout_screen.dart';
 import 'package:smart_canteen/favourites_service.dart';
 import 'models/food.dart';
 import 'auth_service.dart';
+
+final baseUrl = dotenv.get('API_URL');
 
 class FoodDetailsScreen extends StatefulWidget {
   final Food food;
@@ -66,7 +69,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
   Future<void> _fetchReviews() async {
     try {
       final res = await http.get(
-        Uri.parse("http://10.125.22.31:3000/reviews/${widget.food.id}"),
+        Uri.parse("$baseUrl/reviews/${widget.food.id}"),
       );
 
       final data = jsonDecode(res.body);
@@ -96,7 +99,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
     final token = await AuthService().getToken();
 
     await http.post(
-      Uri.parse("http://10.125.22.31:3000/reviews/${widget.food.id}"),
+      Uri.parse("$baseUrl/reviews/${widget.food.id}"),
       headers: {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json",
@@ -119,7 +122,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
     final token = await AuthService().getToken();
 
     await http.delete(
-      Uri.parse("http://10.125.22.31:3000/reviews/${widget.food.id}"),
+      Uri.parse("$baseUrl/reviews/${widget.food.id}"),
       headers: {"Authorization": "Bearer $token"},
     );
 
@@ -159,7 +162,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
               aspectRatio: 1,
               child: food.image != null
                   ? Image.network(
-                      "http://10.125.22.31:3000/food_images/${food.image}",
+                      "$baseUrl/food_images/${food.image}",
                       fit: BoxFit.cover,
                     )
                   : Container(color: Colors.grey.shade300),

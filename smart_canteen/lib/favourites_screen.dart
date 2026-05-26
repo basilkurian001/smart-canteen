@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_canteen/favourites_service.dart';
+import 'package:smart_canteen/main.dart';
 import 'food_details_screen.dart';
 import 'models/food.dart';
 
@@ -53,7 +54,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
           leading: unavailable
               ? const Icon(Icons.block, color: Colors.grey)
               : Image.network(
-                  "http://10.125.22.31:3000/food_images/${item['image']}",
+                  "$API_URL/food_images/${item['image']}",
                   width: 50,
                   fit: BoxFit.cover,
                 ),

@@ -1,15 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_canteen/main.dart';
 import 'auth_service.dart';
 
 class CartService {
-  static const _baseUrl = "http://10.125.22.31:3000";
-
   static Future<void> addToCart(int foodId, {int quantity = 1}) async {
     final token = await AuthService().getToken();
 
     await http.post(
-      Uri.parse("$_baseUrl/cart"),
+      Uri.parse("$API_URL/cart"),
       headers: {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json",
@@ -25,7 +24,7 @@ class CartService {
     final token = await AuthService().getToken();
 
     final res = await http.get(
-      Uri.parse("$_baseUrl/cart/count"),
+      Uri.parse("$API_URL/cart/count"),
       headers: {"Authorization": "Bearer $token"},
     );
 
@@ -37,7 +36,7 @@ class CartService {
     final token = await AuthService().getToken();
 
     final res = await http.get(
-      Uri.parse("$_baseUrl/cart"),
+      Uri.parse("$API_URL/cart"),
       headers: {"Authorization": "Bearer $token"},
     );
 
@@ -49,7 +48,7 @@ class CartService {
     final token = await AuthService().getToken();
 
     await http.put(
-      Uri.parse("$_baseUrl/cart"),
+      Uri.parse("$API_URL/cart"),
       headers: {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json",
@@ -65,7 +64,7 @@ class CartService {
     final token = await AuthService().getToken();
 
     await http.delete(
-      Uri.parse("$_baseUrl/cart/$foodId"),
+      Uri.parse("$API_URL/cart/$foodId"),
       headers: {"Authorization": "Bearer $token"},
     );
   }

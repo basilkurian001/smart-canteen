@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:smart_canteen/main.dart';
 import 'models/food.dart';
 import 'food_details_screen.dart';
 
@@ -26,8 +27,8 @@ class _CategoryFoodsScreenState extends State<CategoryFoodsScreen> {
   Future<void> _fetchCategoryFoods() async {
     try {
       final url = widget.category.toLowerCase() == 'vegetarian'
-          ? "http://10.125.22.31:3000/food/vegetarian"
-          : "http://10.125.22.31:3000/food/category/${widget.category}";
+          ? "$API_URL/food/vegetarian"
+          : "$API_URL/food/category/${widget.category}";
 
       final res = await http.get(Uri.parse(url));
 
@@ -86,7 +87,7 @@ class _CategoryFoodsScreenState extends State<CategoryFoodsScreen> {
                             Expanded(
                               child: food.image != null
                                   ? Image.network(
-                                      "http://10.125.22.31:3000/food_images/${food.image}",
+                                      "$API_URL/food_images/${food.image}",
                                       fit: BoxFit.cover,
                                       width: double.infinity,
                                     )

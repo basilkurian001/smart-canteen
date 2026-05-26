@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_canteen/cart_service.dart';
 import 'package:smart_canteen/cart_notifier.dart';
 import 'package:smart_canteen/checkout_screen.dart';
+import 'package:smart_canteen/main.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -98,7 +99,7 @@ class _CartScreenState extends State<CartScreen> {
                           ? const Icon(Icons.block,
                               size: 60, color: Colors.grey)
                           : Image.network(
-                              "http://10.125.22.31:3000/food_images/${item['image']}",
+                              "$API_URL/food_images/${item['image']}",
                               width: 60,
                               height: 60,
                               fit: BoxFit.cover,
